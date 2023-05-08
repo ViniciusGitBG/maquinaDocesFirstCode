@@ -13,7 +13,7 @@ namespace MaquinaDeDoces
         private string descricao;
         private double preco;
         private int quantidade;
-        private DateTime dtValidade;
+        private DateTime data;
         private Boolean situacao;
 
         // Método construtor
@@ -29,15 +29,16 @@ namespace MaquinaDeDoces
             ModificarSituacao = false; 
         }// fim do método construtor
 
+         // método construtor com parametros
         public Produto(int codigo,string nome, string descricao, double preco, 
-            int quantidade, DateTime dtValidade, Boolean situacao)
+            int quantidade, DateTime data, Boolean situacao)
         {
             ModificarCodigo = codigo;
             ModificarNome = nome;
             ModificarDescricao = descricao;
             ModificarPreco = preco;
             ModificarQuantidade = quantidade;
-            ModificarDataValidade = dtValidade;
+            ModificarDataValidade = data;
             ModificarSituacao = situacao;
 
         } // fim do método construtor com parametros
@@ -85,8 +86,8 @@ namespace MaquinaDeDoces
 
         public DateTime ModificarDataValidade
         {
-            get { return this.dtValidade; }
-            set { this.dtValidade = value; }
+            get { return this.data; }
+            set { this.data = value; }
         }// fim do modificar Datavalidade
 
         public Boolean ModificarSituacao
@@ -226,5 +227,42 @@ namespace MaquinaDeDoces
            
 
         }// fim do solicitar produto
+    }// fim da classe
+
+    class pagamento
+    {// definindo variaveis
+        private int codigo;
+        private string descricao;
+        private double valorTotal;
+        private string formaPagamento;
+        private DateTime data;
+        private DateTime hora;
+        private int codCartao;
+        private string bandeiraCartao;
+
+
+
+        public pagar()
+        {
+            ModificarCodigo = 0;
+            ModificarDescricao = "";
+            ModificarValor = 0;
+            ModificarFormaPagamento = "";
+            ModificarData = new DateTime();
+            ModificarHora = new DateTime();
+            ModificarCodCartao = 0;
+        }// fim do metodo 
+
+        public pagar(int codigo, string descricao, double valorTotal, string formaPagamento, DateTime data, DateTime hora, int codCartao,string bandeiraCartao)
+        {
+            ModificarCodigo = codigo;
+            ModificarDescricao = descricao;
+            ModificarValor = valorTotal;
+            ModificarFormaPagamento = formaPagamento;
+            ModificarData = data;
+            ModificarHora = hora;
+            ModificarCodCartao = codCartao;
+        }// fim do metodo com parametro
+
     }// fim da classe
 } // fim do projeto

@@ -10,15 +10,14 @@ namespace MaquinaDeDoces
     {
         static void Main(string[] args)
         {
+            //Conecta com a classe Control Produto
             ControlProduto controlProd = new ControlProduto();
 
-
-            //chamar o metodo principal daquela classe
+            //Chamar o método principal daquela classe
             controlProd.Operacao();
 
-            Console.ReadLine(); // Manter a janela aberta # como se fosse o leia no portugol
-        }// fim do metodo main
-    }// fim da classe
 
-}
-
+            //Console.ReadLine();//Manter a janela aberta
+        }//fim do método main
+    }//fim da classe
+}//fim do projeto

@@ -1,0 +1,153 @@
+public Pagamento()
+        {
+            ModificarCodigo = 0;
+            ModificarDescricao = "";
+            ModificarValorTotal = 0;
+            ModificarFormaPagamento = "";
+            ModificarData = new DateTime();
+            ModificarHora = new DateTime();
+            ModificarCartao = 0;
+            ModificarBandeiraCartao = "";
+        }// fim do método construtor
+
+        // método construtor com parametros
+        public Pagamento(int codigo, string descricao, double valorTotal, Boolean FormaPagamento,
+            DateTime data, DateTime hora, int codCartao, string bandeiraCartao)
+        {
+            ModificarCodigo = codigo;
+            ModificarDescricao = descricao;
+            ModificarValorTotal = valorTotal;
+            ModificarFormaPagamento = formaPagamento;
+            ModificarData = data;
+            ModificarHora = hora;
+            ModificarCartao = codCartao;
+            ModificarBandeiraCartao = bandeiraCartao;
+
+        } // fim do método construtor com parametros
+
+        public int ModificarCodigo
+        {
+            get { return this.codigo; }
+            set { this.codigo = value; }
+        }
+
+        public string ModificarDescricao
+        {
+            get { return this.descricao; }
+            set { this.descricao = value; }
+        }
+
+        public double ModificarValorTotal
+        {
+            get { return this.valorTotal; }
+            set { this.valorTotal = value; }
+        }
+
+        public string ModificarFormaPagamento
+        {
+            get { return this.formaPagamento; }
+            set { this.formaPagamento = value; }
+        }
+
+        public DateTime ModificarData
+        {
+            get { return this.data; }
+            set { this.data = value; }
+        }
+
+        public DateTime ModificarHora
+        {
+            get { return this.hora; }
+            set { this.hora = value; }
+
+        }
+
+        public int ModificarCartao
+        {
+            get { return this.codCartao;}
+            set { this.codCartao = value; }
+
+        }
+
+        public string ModificarBandeiraCartao
+        {
+            get { return this.bandeiraCartao; }
+            set { this.bandeiraCartao = value; }
+           
+        }
+
+        public string ValidarCartao(Boolean senha, int codigo)
+        {
+            string resultado1 = "Senha invalida";
+            string resultado2 = "Senha autorizada";
+
+            if (codigo == ModificarCartao)
+            {
+                if(senha == true)
+                {
+                    return resultado2;
+                }
+            }
+            else
+            {
+                return resultado1;
+            }
+            return resultado1;
+            
+        }
+
+        public string EfetuarPagamento(int codigo, double saldo)
+        {
+
+            string msg = "Seu saldo não é suficiente";
+            double resultado = 0;
+
+            if(ModificarCodigo == codigo)
+            {
+                if(saldo>= ModificarValorTotal)
+                {
+                    resultado = ModificarValorTotal - saldo;
+                    return Convert.ToString(resultado);
+                }
+                else
+                {
+                    return msg;
+                }
+            }
+            return msg;
+
+
+        }
+
+        public double VerificarTroco(double dinheiro)
+        {
+            double troco = 0;
+            if(dinheiro > ModificarValorTotal)
+            {
+                troco = dinheiro - ModificarValorTotal ;
+            }
+            return troco;
+        }
+
+        public string ConsultarPagamento( int codigo)
+        {
+ 
+                string msg = ""; 
+
+                if (ModificarCodigo == codigo)
+                {
+                    msg = "\nCódigo: " + ModificarCodigo +
+                          "\ndescricao: " + ModificarDescricao +
+                          "\valor total" + ModificarValorTotal +
+                          "\nforma de pagamento realizada:" + ModificarFormaPagamento +
+                          "\nData" + ModificarData +
+                          "\nHora:" + ModificarHora;
+                }
+                else
+                {
+                    msg = "O código digitado não existe!";
+                }
+                return msg;
+            
+
+        }

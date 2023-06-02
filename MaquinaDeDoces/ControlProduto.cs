@@ -6,173 +6,159 @@ using System.Threading.Tasks;
 
 namespace MaquinaDeDoces
 {
-     class ControlProduto
+    class ControlProduto
     {
         Produto prod;
         private int opcao;
+
         public ControlProduto()
         {
             prod = new Produto();
-            modificarOpcao = -1;
-        }// fim do método construtor
+            ModificarOpcao = -1;
+        }//fim do construtor
 
-        // metodo get set
-
-        public int modificarOpcao
+        //Método getSet
+        public int ModificarOpcao
         {
             get { return opcao; }
             set { opcao = value; }
+        }//Fim do método get e set de opcao
 
-        }// fim do metodo get e set
-
-
-
-        public void menu() // inicio metodo menu 
+        //Método Menu
+        public void Menu()
         {
-            
-            Console.WriteLine("Escolha uma das opções abaixo: \n" +
-                "0. Sair\n"+
-                "1. Cadastrar um produto\n" +
-                "2.Consultar um produto\n" +
-                "3.Atualizar um produto\n" +
-                "4. Mudar situação\n");
-            modificarOpcao = Convert.ToInt32(Console.ReadLine());
-        }// fim metodo menu
+            Console.WriteLine("\n\n\nEscolha uma das opções abaixo: \n" +
+                              "0. Sair\n" +
+                              "1. Cadastrar um produto\n" +
+                              "2. Consultar um produto\n" +
+                              "3. Atualizar um produto\n" +
+                              "4. Mudar Situação\n");
+            ModificarOpcao = Convert.ToInt32(Console.ReadLine());
+        }//fim do método Menu
 
-        // Realizar a operação
+        //Realizar a operação
         public void Operacao()
         {
             do
             {
-                menu(); // mostrando menu na tela
-                switch (modificarOpcao)
+                Menu();//Mostrando o menu na tela
+                switch (ModificarOpcao)
                 {
+                    case 0:
+                        Console.Clear();
+                        Console.WriteLine("Obrigado!");
+                        break;
                     case 1:
-                        Console.WriteLine("Obrigado");
-                        Console.Clear();// limpando a tela
+                        Console.Clear();
+                        ColetarDados();
                         break;
                     case 2:
-                        ColetarDados();
-                        Console.Clear();// limpando a tela
+                        Console.Clear();
+                        Consultar();
                         break;
                     case 3:
-                        Consultar();
-                        Console.Clear();// limpando a tela
+                        Console.Clear();
+                        Atualizar();
                         break;
                     case 4:
-                        Atualizar();
-                        Console.Clear();// limpando a tela
-                        break;
-                    case 5:
-                        alterarSituacao();
-                        Console.Clear();// limpando a tela
+                        Console.Clear();
+                        AlterarSituacao();
                         break;
                     default:
-                        Console.WriteLine("Opção escolhida não é valida");
+                        Console.Clear();
+                        Console.WriteLine("Opção escolhida não é válida!");
                         break;
+                }//fim do switch
+            } while (ModificarOpcao != 0);
 
-                }// fim do switch
-            } while(modificarOpcao != 0);
-
-        }// fim do metodo operacao
+        }//fim do método Operacao
 
 
-        // Criar um metodo de solicitação de dados
 
+        //Criar um método de solicitação de Dados
         public void ColetarDados()
         {
-            Console.WriteLine("Informe um código: ");
+            //Coletar Dados
+            Console.WriteLine("Informe o código: ");
             int codigo = Convert.ToInt32(Console.ReadLine());
 
             Console.WriteLine("Informe o nome do produto: ");
             string nome = Console.ReadLine();
 
-            Console.WriteLine("Informe uma breve descrição do produto: ");
+            Console.WriteLine("Faça uma breve descrição do produto: ");
             string descricao = Console.ReadLine();
 
             Console.WriteLine("Informe o preço do produto: ");
             double preco = Convert.ToDouble(Console.ReadLine());
 
-            Console.WriteLine("Informe a quantidade de produto em estoque: ");
+            Console.WriteLine("Informe a quantidade de produtos em estoque: ");
             int quantidade = Convert.ToInt32(Console.ReadLine());
 
-            Console.WriteLine("Informe a data de validade do produto: ");
+            Console.WriteLine("Informe a data de validade do lote do produto: ");
             DateTime data = Convert.ToDateTime(Console.ReadLine());
 
             Console.WriteLine("Informe a Situação: True - Ativo | False - Inativo");
             Boolean situacao = Convert.ToBoolean(Console.ReadLine());
 
-            // cadastrar produto
+            //Cadastrar o Produto
             prod.CadastrarProduto(codigo, nome, descricao, preco, quantidade, data, situacao);
-            Console.WriteLine("Dado não registrado");
+            Console.WriteLine("Dado Registrado!");
+        }//fim do coletarDados
 
-
-        }// fim do metodo construtor coletar dados
-
-
-        // consultar 
-
+        //Consultar
         public void Consultar()
         {
- 
             Console.WriteLine("\n\n\nInforme o código do produto que deseja consultar: ");
             int codigo = Convert.ToInt32(Console.ReadLine());
-            // Escrever o resultado da consulta na tela
-
+            //Escrever o resultado da consulta na tela
             Console.WriteLine("Os dados do produto escolhido são: \n\n\n" + prod.ConsultarProduto(codigo));
-            Console.WriteLine(prod.ConsultarProduto(0)); // para chamar os metodos
+        }//fim do método
 
-        }// fim do metodo 
-
-        // atualizar 
-
+        //Atualizar
         public void Atualizar()
         {
+            //Atualizar Produto
             Console.WriteLine("\n\nInforme o código do produto que deseja atualizar: ");
             int codigo = Convert.ToInt32(Console.ReadLine());
+
             short campo = 0;
-            do {
+
+            do
+            {
                 Console.WriteLine("Informe o campo que deseja atualizar de acordo com a regra abaixo: \n" +
-                    "1. Nome\n" +
-                    "2.descrição\n" +
-                    "3. preço\n" +
-                    "4. quantidade\n" +
-                    "5. data de validade\n" +
-                    "6. Situação\n");
-
+                                  "1. Nome\n" +
+                                  "2. Descrição\n" +
+                                  "3. Preço\n" +
+                                  "4. Quantidade\n" +
+                                  "5. Data de Validade\n" +
+                                  "6. Situação\n");
                 campo = Convert.ToInt16(Console.ReadLine());
-
-                // avisar usuario
-
+                //Avisar o usuário
                 if ((campo < 1) || (campo > 6))
                 {
                     Console.WriteLine("Erro, escolha um código entre 1 e 6");
-
                 }
-
-            }while((campo <1)|| (campo > 6));
-
+            } while ((campo < 1) || (campo > 6));
 
             Console.WriteLine("Informe o dado para a atualização: ");
             string novoDado = Console.ReadLine();
 
-            // chamar o metodo de atualização 
-            prod.AtualizaProduto(codigo, campo, novoDado);
+            //Chamar o método de atualização
+            prod.AtualizarProduto(codigo, campo, novoDado);
+            Console.WriteLine("Atualizado!");
+        }//fim do método Atualizar
 
-        }// fim do metodo atualizar
-
-        public void alterarSituacao()
+        public void AlterarSituacao()
         {
             Console.WriteLine("Informe o código do produto que deseja alterar o status: ");
             int codigo = Convert.ToInt32(Console.ReadLine());
 
-            // chamar o metodo alterarSituacao - classe produto
-
-            prod.SolicitarProduto(codigo);
-            Console.WriteLine("Alterado");
-
-        }
+            //Chamar o método alterarSituação - Classe Produto
+            prod.AlterarSituacao(codigo);
+            Console.WriteLine("Alterado!");
+        }//fim do método
 
 
-    }// fim da classe
-}// fim do projeto
+    }//fim da classe
+}//fim do projeto
+
